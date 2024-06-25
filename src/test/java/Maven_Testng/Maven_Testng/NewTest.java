@@ -1,6 +1,9 @@
 package Maven_Testng.Maven_Testng;
 
 import org.testng.annotations.Test;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.AfterClass;
 
@@ -18,10 +21,10 @@ public class NewTest {
 
 	    @BeforeMethod
 	    public void setUp() {
-	    
+	    	    	
+	    	WebDriverManager.chromedriver().setup();
+	    	driver = new ChromeDriver();
 	    	
-	        System.setProperty("webdriver.chrome.driver", "C:\\Users\\dell\\eclipse-workspace\\Maven_Testng\\service\\chromedriver.exe");
-	        driver = new ChromeDriver();
 	        driver.manage().window().maximize();
 	        driver.manage().deleteAllCookies();
 	        
@@ -70,8 +73,8 @@ public class NewTest {
 
 	        usernameField.sendKeys("invalid_user");
 	        passwordField.sendKeys("invalid_password");
-	        loginButton.click();
-
+	        loginButton.click();  
+	        
 	        
 	        WebElement errorMessage = driver.findElement(By.cssSelector(".error-message-container.error"));
 	        Assert.assertTrue(errorMessage.isDisplayed());
